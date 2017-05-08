@@ -9,7 +9,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,AudioSendMessage
+    MessageEvent, TextMessage, TextSendMessage, AudioSendMessage, AudioMessage
 )
 from siat4ting7 import YOUR_CHANNEL_SECRET, YOUR_CHANNEL_ACCESS_TOKEN
 import json
@@ -39,7 +39,7 @@ def callback():
     return 'OK'
 
 
-@handler.add(MessageEvent, message=TextMessage)
+@handler.add(MessageEvent, message=AudioMessage)
 def handle_message(event):
     資料 = event.message.text
     line_bot_api.reply_message(
