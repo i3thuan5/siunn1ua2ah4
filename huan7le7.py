@@ -9,7 +9,8 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, AudioSendMessage, AudioMessage
+    MessageEvent, TextMessage, TextSendMessage, AudioSendMessage, AudioMessage,
+VideoSendMessage
 )
 from siat4ting7 import YOUR_CHANNEL_SECRET, YOUR_CHANNEL_ACCESS_TOKEN
 import json
@@ -39,17 +40,30 @@ def callback():
     return 'OK'
 
 
-@handler.add(MessageEvent, message=AudioMessage)
+@handler.add(MessageEvent)
+#@handler.add(MessageEvent, message=AudioMessage)
+#@handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     資料 = event.message.text
-    line_bot_api.reply_message(
-        event.reply_token,
-        AudioSendMessage(
-            original_content_url='https://xn--lhrz38b.xn--v0qr21b.xn--kpry57d' +
-            '/%E8%AA%9E%E9%9F%B3%E5%90%88%E6%88%90?%E6%9F%A5%E8%A9%A2%E8%85%94%E5%8F%A3=%E9%96%A9%E5%8D%97%E8%AA%9E&' +
+    original_content_url=(
+'https://xn--lhrz38b.xn--v0qr21b.xn--kpry57d' +
+            '/%E8%AA%9E%E9%9F%B3%E5%90%88%E6%88%90'+
+            '?%E6%9F%A5%E8%A9%A2%E8%85%94%E5%8F%A3=%E9%96%A9%E5%8D%97%E8%AA%9E&' +
             '%E6%9F%A5%E8%A9%A2%E8%AA%9E%E5%8F%A5=' +
             quote(揣分詞(資料))
-        )
+)
+    line_bot_api.reply_message(
+        event.reply_token,
+[
+        TextSendMessage(text=資料, ),
+        TextSendMessage(text=original_content_url, ),
+      VideoSendMessage(original_content_url='https://www.dropbox.com/s/j69523t6bm9xz3g/Special_Course.mp4?dl=0',
+preview_image_url='https://itaigi.tw/121c4ed080e9127a72d31ae85d1458fc.svg',
+ ),
+#       AudioSendMessage(original_content_url=original_content_url,
+#    duration=500       
+# ),
+]
     )
 
 
