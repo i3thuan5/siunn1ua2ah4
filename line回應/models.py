@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.files.base import ContentFile
 
 
 class 圖片表(models.Model):
@@ -18,7 +19,7 @@ class 圖片表(models.Model):
     @classmethod
     def 加一張圖(cls, source, content):
         圖 = cls.objects.create(使用者類型=source.type, 使用者編號=cls._提著編號(source))
-        圖.檔案.save('圖', b''.join(content))
+        圖.檔案.save('圖', ContentFile(b''.join(content)))
 
     @classmethod
     def 全部圖(cls, source, message):
