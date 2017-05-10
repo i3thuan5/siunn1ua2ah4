@@ -1,8 +1,11 @@
 from os.path import join
+from urllib.parse import quote
 
 from django.conf import settings
 from django.core.files.base import ContentFile
 from django.db import models
+
+from siunn1ua2ah4.settings import DOMAIN
 
 
 from 鬥做伙.做影片 import 做影片
@@ -34,6 +37,7 @@ class 圖片表(models.Model):
     def 檔案路徑(self):
         return join(settings.MEDIA_ROOT, self.檔案.name)
 
+
 class 結果影片表(models.Model):
     檔案 = models.FileField()
 
@@ -51,4 +55,4 @@ class 結果影片表(models.Model):
         return join(settings.MEDIA_ROOT, self.檔案.name)
 
     def 影片網址(self):
-        return self.檔案.url
+        return DOMAIN + quote(self.檔案.url)

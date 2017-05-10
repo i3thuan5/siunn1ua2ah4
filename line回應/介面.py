@@ -49,12 +49,17 @@ def 文字(event):
     資料 = event.message.text
     全部圖 = 圖片表.全部圖(event.source)
     影片 = 結果影片表.加影片(全部圖, [], [資料])
+    影片網址=影片.影片網址()
     line_bot_api.reply_message(
         event.reply_token,
         [
-            TextSendMessage(text=影片.影片網址()),
+            TextSendMessage(text=影片網址),
             VideoSendMessage(
                 original_content_url='https://www.dropbox.com/s/j69523t6bm9xz3g/Special_Course.mp4?dl=0',
+                preview_image_url='https://itaigi.tw/121c4ed080e9127a72d31ae85d1458fc.svg',
+            ),
+            VideoSendMessage(
+                original_content_url=影片網址,
                 preview_image_url='https://itaigi.tw/121c4ed080e9127a72d31ae85d1458fc.svg',
             ),
         ]
