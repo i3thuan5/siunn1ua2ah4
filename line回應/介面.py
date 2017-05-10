@@ -1,5 +1,10 @@
 import http
+import json
 from urllib.parse import quote
+
+from django.conf import settings
+from django.http.response import HttpResponse, HttpResponseBadRequest
+from django.views.decorators.csrf import csrf_exempt
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -11,11 +16,10 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, AudioSendMessage, AudioMessage,
     VideoSendMessage
 )
-import json
-from django.conf import settings
-from django.views.decorators.csrf import csrf_exempt
-from django.http.response import HttpResponse, HttpResponseBadRequest
 from linebot.models.messages import ImageMessage
+
+
+from line回應.models import 圖片表
 
 
 line_bot_api = LineBotApi(settings.YOUR_CHANNEL_ACCESS_TOKEN)
