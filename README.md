@@ -21,5 +21,6 @@ pip install line-bot-sdk django tai5-uan5_gian5-gi2_kang1-ku7
 ```
 
 ### Line設定
-[設定](https://business.line.me/en/)佮[設明](https://devdocs.line.me/en/#send-message-object)
-
+* [SDK](https://github.com/line/line-bot-sdk-python/tree/6fde69b527229b3d6115fbcd0ef9be499bf54fb5)
+* [設定](https://business.line.me/en/)
+* [說明](https://devdocs.line.me/en/#send-message-object)
