@@ -23,7 +23,7 @@ handler = WebhookHandler(settings.YOUR_CHANNEL_SECRET)
 @csrf_exempt
 def line介面(request):
     # get X-Line-Signature header value
-    signature = request.META['X-Line-Signature']
+    signature = request.META['HTTP_X_LINE_SIGNATURE']
 
     # get request body as text
     body = request.body.decode('utf-8')
