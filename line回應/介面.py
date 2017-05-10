@@ -14,6 +14,7 @@ from linebot.models import (
 import json
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
+from django.http.response import HttpResponse, HttpResponseBadRequest
 
 
 line_bot_api = LineBotApi(settings.YOUR_CHANNEL_ACCESS_TOKEN)
@@ -32,9 +33,9 @@ def line介面(request):
     try:
         handler.handle(body, signature)
     except InvalidSignatureError:
-        abort(400)
+        HttpResponseBadRequest()
 
-    return 'OK'
+    return HttpResponse()
 
 
 @handler.add(MessageEvent)
@@ -54,12 +55,10 @@ def handle_message(event):
         [
             TextSendMessage(text=資料, ),
             TextSendMessage(text=original_content_url, ),
-            VideoSendMessage(original_content_url='https://www.dropbox.com/s/j69523t6bm9xz3g/Special_Course.mp4?dl=0',
-                             preview_image_url='https://itaigi.tw/121c4ed080e9127a72d31ae85d1458fc.svg',
-                             ),
-            #       AudioSendMessage(original_content_url=original_content_url,
-            #    duration=500
-            # ),
+            VideoSendMessage(
+                original_content_url='https://www.dropbox.com/s/j69523t6bm9xz3g/Special_Course.mp4?dl=0',
+                preview_image_url='https://itaigi.tw/121c4ed080e9127a72d31ae85d1458fc.svg',
+            ),
         ]
     )
 
