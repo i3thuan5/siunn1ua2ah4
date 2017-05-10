@@ -15,5 +15,5 @@ mkvmerge -o output.avi tmp.avi huan1ing5.srt
 ### 後端程式
 ```
 virtualenv --python=python3 venv; . venv/bin/activate; pip install --upgrade pip # 設置環境檔
-pip install line-bot-sdk flask django
+pip install line-bot-sdk django tai5-uan5_gian5-gi2_kang1-ku7
 ```
