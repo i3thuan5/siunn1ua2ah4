@@ -118,6 +118,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_ROOT = os.path.join(BASE_DIR, "資料庫影音檔案")
+MEDIA_URL = "/資料庫影音檔案/"
+
 I7SIAT4_TOO5 = os.path.join(BASE_DIR, '圖', 'ti1a2.jpg')
 
 from siat4ting7 import SECRET_KEY, YOUR_CHANNEL_SECRET, YOUR_CHANNEL_ACCESS_TOKEN

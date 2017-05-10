@@ -1,5 +1,11 @@
-from django.db import models
+from os.path import join
+
+from django.conf import settings
 from django.core.files.base import ContentFile
+from django.db import models
+
+
+from 鬥做伙.做影片 import 做影片
 
 
 class 圖片表(models.Model):
@@ -24,3 +30,23 @@ class 圖片表(models.Model):
     @classmethod
     def 全部圖(cls, source):
         return cls.objects.filter(使用者類型=source.type, 使用者編號=cls._提著編號(source))
+
+
+class 結果影片表(models.Model):
+    檔案 = models.FileField()
+
+    @classmethod
+    def 加影片(cls, 全部圖, 聲陣列, 文字陣列):
+        圖陣列 = []
+        for 圖 in 全部圖:
+            圖陣列.append(圖.name)
+        結果影片 = cls.objects.create()
+        結果影片.檔案.save('影片', ContentFile(b''))
+        做影片.使用者提供的資料(圖陣列, 聲陣列, 文字陣列, 結果影片.影片檔案路徑())
+        return 結果影片
+
+    def 影片檔案路徑(self):
+        return join(settings.MEDIA_ROOT, self.檔案.name)
+
+    def 影片網址(self):
+        return self.檔案.url
