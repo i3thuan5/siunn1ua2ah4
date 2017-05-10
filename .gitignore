@@ -89,3 +89,7 @@ ENV/
 .ropeproject
 
 *.avi
+/.project
+/.pydevproject
+/.settings
+/db.sqlite3
