@@ -21,7 +21,7 @@ from django.views.static import serve
 # from django.contrib import admin
 urlpatterns = [
     url(r'^', include('line回應.網址')),
-    url(r'^資料庫影音檔案/(?P<path>.*)$', serve, {
+    url(r'^upload/(?P<path>.*)$', serve, {
         'document_root': settings.MEDIA_ROOT, 'show_indexes': False
     }),
     #     url(r'^admin/', admin.site.urls),

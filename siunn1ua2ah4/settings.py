@@ -119,8 +119,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 DOMAIN='https://xn--iwqtoz61h.xn--v0qr21b.xn--kpry57d'
-MEDIA_ROOT = os.path.join(BASE_DIR, "資料庫影音檔案")
-MEDIA_URL = "/資料庫影音檔案/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "upload")
+MEDIA_URL = "/upload/"
 
 
 I7SIAT4_TOO5 = os.path.join(BASE_DIR, '圖', 'ti1a2.jpg')
