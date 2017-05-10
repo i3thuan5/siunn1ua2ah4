@@ -77,7 +77,7 @@ def 圖(event):
     line_bot_api.reply_message(
         event.reply_token,
         [
-            TextSendMessage(text=圖, ),
+            TextSendMessage(text='圖', ),
         ]
     )
 
