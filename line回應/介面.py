@@ -13,8 +13,8 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, AudioSendMessage, AudioMessage,
-    VideoSendMessage
+    MessageEvent, TextMessage, AudioMessage,
+    TextSendMessage, VideoSendMessage
 )
 from linebot.models.messages import ImageMessage
 
@@ -78,7 +78,10 @@ def 聲(event):
 
 @handler.add(MessageEvent, message=ImageMessage)
 def 圖(event):
-    圖片表.加一張圖(event.source, line_bot_api.get_message_content(event.message.id))
+    圖片表.加一張圖(
+        event.source,
+        line_bot_api.get_message_content(event.message.id).iter_content()
+    )
     全部圖 = 圖片表.全部圖(event.source)
     line_bot_api.reply_message(
         event.reply_token,
