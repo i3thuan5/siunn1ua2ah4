@@ -36,6 +36,10 @@ class 圖片表(models.Model):
     def 檔案路徑(self):
         return join(settings.MEDIA_ROOT, self.檔案.name)
 
+    def delete(self):
+        self.檔案.delete()
+        super(圖片表, self).delete()
+
 
 class 結果影片表(models.Model):
     檔案 = models.FileField()

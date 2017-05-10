@@ -57,6 +57,7 @@ def 文字(event):
             ),
         ]
     )
+    全部圖.delete()
 
 
 @handler.add(MessageEvent, message=AudioMessage)
