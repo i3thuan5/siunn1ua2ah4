@@ -31,6 +31,8 @@ class 圖片表(models.Model):
     def 全部圖(cls, source):
         return cls.objects.filter(使用者類型=source.type, 使用者編號=cls._提著編號(source))
 
+    def 檔案路徑(self):
+        return join(settings.MEDIA_ROOT, self.檔案.name)
 
 class 結果影片表(models.Model):
     檔案 = models.FileField()
@@ -39,7 +41,7 @@ class 結果影片表(models.Model):
     def 加影片(cls, 全部圖, 聲陣列, 文字陣列):
         圖陣列 = []
         for 圖 in 全部圖:
-            圖陣列.append(圖.name)
+            圖陣列.append(圖.檔案路徑())
         結果影片 = cls.objects.create()
         結果影片.檔案.save('影片', ContentFile(b''))
         做影片.使用者提供的資料(圖陣列, 聲陣列, 文字陣列, 結果影片.影片檔案路徑())
