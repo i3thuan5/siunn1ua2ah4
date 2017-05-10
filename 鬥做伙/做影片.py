@@ -3,10 +3,13 @@ import http
 from itertools import zip_longest
 import json
 from os.path import join
+from shutil import copyfile
 from tempfile import TemporaryDirectory
 from urllib.parse import quote
 
 from siunn1ua2ah4.settings import I7SIAT4_TOO5
+
+
 from 臺灣言語工具.解析整理.拆文分析器 import 拆文分析器
 
 
@@ -57,14 +60,17 @@ class 做影片(程式腳本):
             敆做伙指令.pop()
             cls._走指令(敆做伙指令)
 
+            敆做伙轉換檔 = join(目錄, 'result.mp4')
             上尾轉換指令 = ['avconv']
             上尾轉換指令.append('-i')
             上尾轉換指令.append(敆做伙結果檔)
 #             上尾轉換指令.append('-c')
 #             上尾轉換指令.append('copy')
             上尾轉換指令.append('-y')
-            上尾轉換指令.append(存檔所在)
+            上尾轉換指令.append(敆做伙轉換檔)
             cls._走指令(上尾轉換指令)
+
+            copyfile(敆做伙轉換檔, 存檔所在)
 
     @classmethod
     def 轉文本資料(cls, 文字陣列, 目錄):
