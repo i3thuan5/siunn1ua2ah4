@@ -89,6 +89,7 @@ ENV/
 .ropeproject
 
 *.avi
+*.mp4
 /.project
 /.pydevproject
 /.settings

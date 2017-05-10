@@ -16,7 +16,7 @@ class 敆檔案試驗(TestCase):
 
     def test_一組(self):
         with TemporaryDirectory() as 目錄:
-            檔案的所在 = join(目錄, 'a.avi')
+            檔案的所在 = join(目錄, 'a.mp4')
             做影片.敆做伙([self.圖], [self.音], [self.字], 檔案的所在)
             self.assertTrue(isfile(檔案的所在))
 

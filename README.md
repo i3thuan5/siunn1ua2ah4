@@ -5,6 +5,9 @@
 ### 腳本
 ```
 sudo apt-get install mkvtoolnix
+# 直接做
+avconv -i ti1a2.jpg -i huan1ing5.wav -vf subtitles=huan1ing5.srt -s svga -y tmp.avi
+
 avconv -i ti1a2.jpg -i huan1ing5.wav -s svga -y tmp.avi
 mkvmerge -o output.avi tmp.avi huan1ing5.srt
 ```
