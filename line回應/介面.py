@@ -74,10 +74,12 @@ def 聲(event):
 
 @handler.add(MessageEvent, message=ImageMessage)
 def 圖(event):
+    圖片表.加一張圖(event.source, line_bot_api.get_message_content(event.message.id))
+    全部圖 = 圖片表.全部圖(event.source)
     line_bot_api.reply_message(
         event.reply_token,
         [
-            TextSendMessage(text='圖', ),
+            TextSendMessage(text='這馬有 {} 張背景圖'.format(全部圖)),
         ]
     )
 
