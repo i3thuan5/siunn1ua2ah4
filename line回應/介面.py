@@ -15,6 +15,7 @@ import json
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from django.http.response import HttpResponse, HttpResponseBadRequest
+from linebot.models.messages import ImageMessage
 
 
 line_bot_api = LineBotApi(settings.YOUR_CHANNEL_ACCESS_TOKEN)
@@ -38,10 +39,8 @@ def line介面(request):
     return HttpResponse()
 
 
-@handler.add(MessageEvent)
-#@handler.add(MessageEvent, message=AudioMessage)
-#@handler.add(MessageEvent, message=TextMessage)
-def handle_message(event):
+@handler.add(MessageEvent, message=TextMessage)
+def 文字(event):
     資料 = event.message.text
     original_content_url = (
         'https://xn--lhrz38b.xn--v0qr21b.xn--kpry57d' +
@@ -59,6 +58,26 @@ def handle_message(event):
                 original_content_url='https://www.dropbox.com/s/j69523t6bm9xz3g/Special_Course.mp4?dl=0',
                 preview_image_url='https://itaigi.tw/121c4ed080e9127a72d31ae85d1458fc.svg',
             ),
+        ]
+    )
+
+
+@handler.add(MessageEvent, message=AudioMessage)
+def 聲(event):
+    line_bot_api.reply_message(
+        event.reply_token,
+        [
+            TextSendMessage(text='聲', ),
+        ]
+    )
+
+
+@handler.add(MessageEvent, message=ImageMessage)
+def 圖(event):
+    line_bot_api.reply_message(
+        event.reply_token,
+        [
+            TextSendMessage(text=圖, ),
         ]
     )
 
