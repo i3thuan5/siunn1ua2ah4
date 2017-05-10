@@ -3,7 +3,7 @@ from django.db import models
 
 class 圖片表(models.Model):
     使用者類型 = models.CharField(max_length=200)
-    使用者編號 = models.IntegerField()
+    使用者編號 = models.CharField(max_length=200)
     檔案 = models.FileField()
 
     @classmethod
