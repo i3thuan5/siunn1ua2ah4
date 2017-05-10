@@ -4,6 +4,7 @@
 
 ### 腳本
 ```
+sudo apt-get install -y language-pack-zh-hant fonts-wqy-microhei
 sudo apt-get install -y libavcodec-extra
 sudo apt-get install -y mkvtoolnix 
 # 直接做
