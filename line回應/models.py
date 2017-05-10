@@ -22,5 +22,5 @@ class 圖片表(models.Model):
         圖.檔案.save('圖', ContentFile(b''.join(content)))
 
     @classmethod
-    def 全部圖(cls, source, message):
+    def 全部圖(cls, source):
         return cls.objects.filter(使用者類型=source.type, 使用者編號=cls._提著編號(source))

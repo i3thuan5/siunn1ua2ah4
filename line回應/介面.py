@@ -86,7 +86,7 @@ def 圖(event):
     line_bot_api.reply_message(
         event.reply_token,
         [
-            TextSendMessage(text='這馬有 {} 張背景圖'.format(全部圖)),
+            TextSendMessage(text='這馬有 {} 張背景圖'.format(全部圖.count())),
         ]
     )
 
