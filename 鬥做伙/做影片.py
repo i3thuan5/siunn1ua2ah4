@@ -3,24 +3,26 @@ from os.path import join
 from tempfile import TemporaryDirectory
 from itertools import zip_longest
 from siunn1ua2ah4.settings import I7SIAT4_TOO5
+from 臺灣言語工具.解析整理.拆文分析器 import 拆文分析器
 
 
 class 做影片(程式腳本):
     @classmethod
     def 收著資料(cls, 圖陣列, 聲陣列, 字陣列, 存檔所在):
-        新聲陣列 = []
-        for 聲, 文本 in zip_longest(聲陣列, 字陣列):
-            if 聲 is not None:
-                新聲陣列.append(聲)
+        with TemporaryDirectory() as 目錄:
+            新聲陣列 = []
+            for 第幾个, (聲, 字) in enumerate(zip_longest(聲陣列, 字陣列)):
+                if 聲 is not None:
+                    新聲陣列.append(聲)
+                else:
+                    新聲陣列.append(cls.揣聲音(字, join(目錄, '{}.wav'.format(第幾个))))
+            if len(圖陣列) == 0:
+                新圖陣列 = [I7SIAT4_TOO5] * len(字陣列)
             else:
-                新聲陣列.append(cls.揣聲音(文本))
-        if len(圖陣列) == 0:
-            新圖陣列 = [I7SIAT4_TOO5] * len(字陣列)
-        else:
-            新圖陣列 = []
-            while len(新圖陣列) < len(字陣列):
-                新圖陣列.append(圖陣列[len(新圖陣列) % len(圖陣列)])
-        cls.敆做伙(新圖陣列, 新聲陣列, 字陣列, 存檔所在)
+                新圖陣列 = []
+                while len(新圖陣列) < len(字陣列):
+                    新圖陣列.append(圖陣列[len(新圖陣列) % len(圖陣列)])
+            cls.敆做伙(新圖陣列, 新聲陣列, 字陣列, 存檔所在)
 
     @classmethod
     def 敆做伙(cls, 圖陣列, 聲陣列, 字陣列, 存檔所在):
@@ -54,5 +56,26 @@ class 做影片(程式腳本):
             cls._走指令(上尾轉換指令)
 
     @classmethod
-    def 揣聲音(cls, 字):
-        pass
+    def 揣聲音(cls, 字, 存檔的所在):
+        with open(字) as 檔案:
+            *_, 漢字, 臺羅 = 檔案.read().strip().split('\n')
+            with open(存檔的所在, 'wb') as 存檔:
+                存檔.write(cls.掠聲音(漢字, 臺羅))
+
+    @classmethod
+    def 掠聲音(漢字, 臺羅):
+        句物件 = 拆文分析器.對齊句物件(漢字, 臺羅)
+        conn = http.client.HTTPConnection(
+            "xn--lhrz38b.xn--v0qr21b.xn--kpry57d")
+        conn.request(
+            "GET",
+            '%E8%AA%9E%E9%9F%B3%E5%90%88%E6%88%90?' +
+            '%E6%9F%A5%E8%A9%A2%E8%85%94%E5%8F%A3=%E9%96%A9%E5%8D%97%E8%AA%9E' +
+            '&%E6%9F%A5%E8%A9%A2%E8%AA%9E%E5%8F%A5=' +
+            quote(句物件.看分詞())
+        )
+        r1 = conn.getresponse()
+        if r1.status != 200:
+            print(r1.status, r1.reason)
+            raise RuntimeError()
+        return r1.read()
