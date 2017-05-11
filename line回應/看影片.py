@@ -15,9 +15,15 @@ def 影片連結(request, path):
 </head>
 <body>
 <h1>傷倚矣 - 生影片</h1>
-<a href='/upload/{}' download>下載影片</a><br/>
+<p>
+    <a href='/upload/{}' download>下載影片</a>
+</p>
+<p>
 若出現「不支援檔案下載功能」，無法度掠影片，請試正爿面頂目錄「以其他應用程式開啟」的chrome開。<br/>
-掠落來就會當分享矣
+</p>
+<p>
+掠落來就會當分享到fb佮line矣
+</p>
 </body>
 """
         .format(path)
