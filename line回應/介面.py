@@ -50,7 +50,9 @@ def 文字(event):
         event.reply_token,
         [
             TextSendMessage(
-                text='完成矣！攏總收著 {} 張背景圖。影片網址： {}'.format(全部圖.count(), 影片網址)
+                text='完成矣！攏總收著 {} 張背景圖。影片網址： {}'.format(
+                    全部圖.count(), 影片.網頁下載網址()
+                    )
             ),
             VideoSendMessage(
                 original_content_url=影片網址,

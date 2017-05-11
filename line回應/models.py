@@ -59,3 +59,6 @@ class 結果影片表(models.Model):
 
     def 影片網址(self):
         return DOMAIN + self.檔案.url
+
+    def 網頁下載網址(self):
+        return DOMAIN + self.檔案.url.replace('/upload/', '/khuann3/')
