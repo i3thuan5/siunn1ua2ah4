@@ -7,7 +7,7 @@ def 影片連結(request, path):
         """
 <doctype html>
 <head>
-  <style type="text/css">
+  <style type='text/css'>
   html {
     font-size: 300%;
   }
