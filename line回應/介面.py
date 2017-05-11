@@ -49,8 +49,9 @@ def 文字(event):
     line_bot_api.reply_message(
         event.reply_token,
         [
-            TextSendMessage(text='完成矣！攏總收著 {} 張背景圖。影片網址：'.format(全部圖.count())),
-            TextSendMessage(text=影片網址),
+            TextSendMessage(
+                text='完成矣！攏總收著 {} 張背景圖。影片網址： {}'.format(全部圖.count(), 影片網址)
+            ),
             VideoSendMessage(
                 original_content_url=影片網址,
                 preview_image_url='https://avatars0.githubusercontent.com/u/6355592?v=3&s=400',
