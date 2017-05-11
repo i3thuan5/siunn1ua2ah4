@@ -46,9 +46,15 @@ class 做影片(程式腳本):
             全部結果檔 = []
             for 第幾个, (圖, 聲, 字) in enumerate(zip(圖陣列, 聲陣列, 字陣列)):
                 結果檔 = join(目錄, 'output{}.mkv'.format(第幾个))
+                暫時圖 = join(目錄, 'jpg{}.jpg'.format(第幾个))
+                cls._走指令([
+                    'convert',
+                    圖,
+                    暫時圖,
+                ])
                 cls._走指令([
                     'avconv',
-                    '-i', 圖, '-i', 聲, '-vf', 'subtitles={}'.format(字),
+                    '-i', 暫時圖, '-i', 聲, '-vf', 'subtitles={}'.format(字),
                     '-s', 'svga', '-y', 結果檔,
                 ])
                 全部結果檔.append(結果檔)
@@ -116,9 +122,9 @@ class 做影片(程式腳本):
     @classmethod
     def 掠聲音(cls, 漢字, 臺羅):
         句物件 = 拆文分析器.對齊句物件(
-            文章粗胚.數字英文中央全加分字符號(漢字), 
+            文章粗胚.數字英文中央全加分字符號(漢字),
             文章粗胚.建立物件語句前處理減號(臺灣閩南語羅馬字拼音, 臺羅)
-            )
+        )
         conn = http.client.HTTPConnection(
             "xn--lhrz38b.xn--v0qr21b.xn--kpry57d"
         )

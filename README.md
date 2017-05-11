@@ -5,7 +5,7 @@
 ### 腳本
 ```
 sudo apt-get install -y language-pack-zh-hant fonts-wqy-microhei
-sudo apt-get install -y libavcodec-extra
+sudo apt-get install -y imagemagick libav-tools libavcodec-extra
 sudo apt-get install -y mkvtoolnix 
 # 直接做
 avconv -i ti1a2.jpg -i huan1ing5.wav -vf subtitles=huan1ing5.srt -s svga -y tmp.avi
