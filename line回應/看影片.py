@@ -8,9 +8,9 @@ def 影片連結(request, path):
 <doctype html>
 <head>
   <style type='text/css'>
-  html {
+  html {{
     font-size: 300%;
-  }
+  }}
   </style>
 </head>
 <body>
