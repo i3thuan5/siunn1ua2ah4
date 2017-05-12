@@ -82,7 +82,12 @@ class 做影片(程式腳本):
 
     @classmethod
     def 轉文本資料(cls, 文字陣列, 目錄):
-        漢羅 = '\n'.join(文字陣列)
+        漢羅陣列 = []
+        for 文字 in 文字陣列:
+            for 一逝 in 文字.split('\n'):
+                if len(一逝.strip()) != 0:
+                    漢羅陣列.append(一逝.strip())
+        漢羅 = '\n'.join(漢羅陣列)
         conn = http.client.HTTPConnection(
             "xn--lhrz38b.xn--v0qr21b.xn--kpry57d"
         )
