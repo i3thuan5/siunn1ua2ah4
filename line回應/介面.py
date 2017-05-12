@@ -17,6 +17,7 @@ from linebot.models.messages import ImageMessage
 
 from line回應.models import 圖片表
 from line回應.models import 結果影片表
+import re
 
 
 line_bot_api = LineBotApi(settings.YOUR_CHANNEL_ACCESS_TOKEN)
@@ -42,25 +43,32 @@ def line介面(request):
 
 @handler.add(MessageEvent, message=TextMessage)
 def 文字(event):
-    資料 = event.message.text
-    全部圖 = 圖片表.全部圖(event.source)
-    影片 = 結果影片表.加影片(全部圖, [], [資料])
-    影片網址 = 影片.影片網址()
-    line_bot_api.reply_message(
-        event.reply_token,
-        [
-            TextSendMessage(
-                text='完成矣！攏總收著 {} 張背景圖。影片網址： {}'.format(
-                    全部圖.count(), 影片.網頁下載網址()
+    回應 = False
+    if event.source.type == 'user':
+        回應 = True
+        資料 = event.message.text
+    elif re.match('[台臺]語[：:]', event.message.text):
+        回應 = True
+        資料 = event.message.text[3:]
+    if 回應:
+        全部圖 = 圖片表.全部圖(event.source)
+        影片 = 結果影片表.加影片(全部圖, [], [資料])
+        影片網址 = 影片.影片網址()
+        line_bot_api.reply_message(
+            event.reply_token,
+            [
+                TextSendMessage(
+                    text='完成矣！攏總收著 {} 張背景圖。影片網址： {}'.format(
+                        全部圖.count(), 影片.網頁下載網址()
                     )
-            ),
-            VideoSendMessage(
-                original_content_url=影片網址,
-                preview_image_url='https://avatars0.githubusercontent.com/u/6355592?v=3&s=400',
-            ),
-        ]
-    )
-    全部圖.delete()
+                ),
+                VideoSendMessage(
+                    original_content_url=影片網址,
+                    preview_image_url='https://avatars0.githubusercontent.com/u/6355592?v=3&s=400',
+                ),
+            ]
+        )
+        全部圖.delete()
 
 
 @handler.add(MessageEvent, message=AudioMessage)
