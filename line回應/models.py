@@ -52,7 +52,7 @@ class 結果影片表(models.Model):
             圖陣列.append(圖.檔案路徑())
         結果影片 = cls.objects.create()
         結果影片.檔案.save('result', ContentFile(b''))
-        結果影片.縮圖.save('result', ContentFile(b''))
+        結果影片.縮圖.save(結果影片.檔案.name + '.jpg', ContentFile(b''))
         做影片.使用者提供的資料(
             圖陣列, 聲陣列, 文字陣列,
             結果影片.影片檔案路徑(), 結果影片.影片縮圖路徑()
