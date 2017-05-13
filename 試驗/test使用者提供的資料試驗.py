@@ -1,4 +1,4 @@
-from os.path import abspath, dirname, join
+from os.path import abspath, dirname, join, isfile
 from tempfile import TemporaryDirectory
 
 from django.test.testcases import TestCase
@@ -13,17 +13,31 @@ class 使用者提供的資料試驗(TestCase):
         self.音 = join(self.目錄, '圖', 'huan1ing5.wav')
         self.字 = join(self.目錄, '圖', 'huan1ing5.srt')
 
+    def test_有產生縮圖(self):
+        with TemporaryDirectory() as 目錄:
+            做影片.使用者提供的資料(
+                [], [], ['逐家好'],
+                join(目錄, 'sui.mp4'), join(目錄, 'sui.jpg'),
+            )
+            self.assertTrue(isfile(join(目錄, 'sui.jpg')))
+
     def test_產生檔案看覓(self):
-        做影片.使用者提供的資料([], [], ['逐家好', '我是媠豬'], join(self.目錄, 'sui.mp4'))
+        做影片.使用者提供的資料(
+            [], [], ['逐家好', '我是媠豬'],
+            join(self.目錄, 'sui.mp4'), join(self.目錄, 'sui.jpg'),
+        )
 
     def test_有空逝(self):
         with TemporaryDirectory() as 目錄:
-            做影片.使用者提供的資料([], [], ['逐家好','', '我是媠豬'], join(目錄, 'sui.mp4'))
+            做影片.使用者提供的資料(
+                [], [], ['逐家好', '', '我是媠豬'],
+                join(目錄, 'sui.mp4'), join(目錄, 'sui.jpg'),
+            )
 
     def test_組合圖的檔頭(self):
         with TemporaryDirectory() as 目錄:
             self.組合圖 = join(self.目錄, '圖', 'image_oyuxYDl')
             做影片.使用者提供的資料(
                 [self.組合圖], [], ['逐家好', '我是媠豬'],
-                join(目錄, 'sui.mp4')
+                join(目錄, 'sui.mp4'), join(目錄, 'sui.jpg'),
             )

@@ -43,6 +43,7 @@ class 圖片表(models.Model):
 
 class 結果影片表(models.Model):
     檔案 = models.FileField()
+    縮圖 = models.FileField()
 
     @classmethod
     def 加影片(cls, 全部圖, 聲陣列, 文字陣列):
@@ -51,7 +52,11 @@ class 結果影片表(models.Model):
             圖陣列.append(圖.檔案路徑())
         結果影片 = cls.objects.create()
         結果影片.檔案.save('result', ContentFile(b''))
-        做影片.使用者提供的資料(圖陣列, 聲陣列, 文字陣列, 結果影片.影片檔案路徑())
+        結果影片.縮圖.save('result', ContentFile(b''))
+        做影片.使用者提供的資料(
+            圖陣列, 聲陣列, 文字陣列,
+            結果影片.影片檔案路徑(), 結果影片.影片縮圖路徑()
+        )
         return 結果影片
 
     def 影片檔案路徑(self):
@@ -59,6 +64,12 @@ class 結果影片表(models.Model):
 
     def 影片網址(self):
         return DOMAIN + self.檔案.url
+
+    def 影片縮圖路徑(self):
+        return join(settings.MEDIA_ROOT, self.縮圖.name)
+
+    def 縮圖網址(self):
+        return DOMAIN + self.縮圖.url
 
     def 網頁下載網址(self):
         return DOMAIN + self.檔案.url.replace('/upload/', '/khuann3/')

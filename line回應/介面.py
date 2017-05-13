@@ -53,7 +53,6 @@ def 文字(event):
     if 回應:
         全部圖 = 圖片表.全部圖(event.source)
         影片 = 結果影片表.加影片(全部圖, [], [資料])
-        影片網址 = 影片.影片網址()
         line_bot_api.reply_message(
             event.reply_token,
             [
@@ -63,8 +62,8 @@ def 文字(event):
                     )
                 ),
                 VideoSendMessage(
-                    original_content_url=影片網址,
-                    preview_image_url='https://avatars0.githubusercontent.com/u/6355592?v=3&s=400',
+                    original_content_url=影片.影片網址(),
+                    preview_image_url=影片.縮圖網址(),
                 ),
             ]
         )
