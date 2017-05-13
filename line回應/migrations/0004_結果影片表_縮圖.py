@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='結果影片表',
             name='縮圖',
-            field=models.FileField(default=None, upload_to=''),
+            field=models.FileField(default='', upload_to=''),
             preserve_default=False,
         ),
     ]
