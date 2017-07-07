@@ -93,4 +93,5 @@ ENV/
 /.project
 /.pydevproject
 /.settings
-/db.sqlite3
+/db.sqlite3*
+/資料庫影音檔案*
