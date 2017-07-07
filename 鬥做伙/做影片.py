@@ -39,7 +39,8 @@ class 做影片(程式腳本):
                 if 聲 is not None:
                     新聲陣列.append(聲)
                 else:
-                    新聲陣列.append(cls.揣聲音(腔口參數, 字, join(目錄, '{}.wav'.format(第幾个))))
+                    新聲陣列.append(
+                        cls.揣聲音(腔口參數, 字, join(目錄, '{}.wav'.format(第幾个))))
             if len(圖陣列) == 0:
                 新圖陣列 = [I7SIAT4_TOO5] * len(字陣列)
             else:
@@ -150,10 +151,14 @@ class 做影片(程式腳本):
         )
         conn.request(
             "GET",
-            '/%E8%AA%9E%E9%9F%B3%E5%90%88%E6%88%90?' +
-            '%E6%9F%A5%E8%A9%A2%E8%85%94%E5%8F%A3=%E9%96%A9%E5%8D%97%E8%AA%9E' +
-            '&%E6%9F%A5%E8%A9%A2%E8%AA%9E%E5%8F%A5=' +
-            quote(句物件.看分詞())
+            '{}?{}={}&{}={}'.format(
+                quote('語音合成'),
+                quote('查詢腔口'),
+                quote(腔口參數['服務腔口']),
+                quote('查詢語句'),
+                quote(句物件.看分詞()),
+            )
+
         )
         r1 = conn.getresponse()
         if r1.status != 200:
