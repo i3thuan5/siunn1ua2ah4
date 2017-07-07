@@ -47,7 +47,7 @@ def 文字(event):
     if 腔口:
         全部圖 = 圖片表.全部圖(event.source)
         影片 = 結果影片表.加影片(
-            settings.KIUNN1_KHAU2_TSHAM1_SOO3['腔口'], 全部圖, [], [資料]
+            settings.KIUNN1_KHAU2_TSHAM1_SOO3[腔口], 全部圖, [], [資料]
         )
         line_bot_api.reply_message(
             event.reply_token,
