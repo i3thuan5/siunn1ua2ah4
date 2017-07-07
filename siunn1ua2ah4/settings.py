@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 from 臺灣言語工具.音標系統.閩南語.臺灣閩南語羅馬字拼音 import 臺灣閩南語羅馬字拼音
+from 臺灣言語工具.音標系統.客話.臺灣客家話拼音 import 臺灣客家話拼音
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -129,10 +130,16 @@ I7SIAT4_TOO5 = os.path.join(BASE_DIR, '圖', 'ti1a2.jpg')
 from siat4ting7 import SECRET_KEY, YOUR_CHANNEL_SECRET, YOUR_CHANNEL_ACCESS_TOKEN
 SECRET_KEY, YOUR_CHANNEL_SECRET, YOUR_CHANNEL_ACCESS_TOKEN
 
-KIUNN1_KHAU2_TSHAM1_SOO3={
+KIUNN1_KHAU2_TSHAM1_SOO3 = {
     '臺語': {
         '服務腔口': '閩南語',
         '標音欄位': '臺羅閏號調',
         '拼音': 臺灣閩南語羅馬字拼音,
     },
 }
+for 客話 in ['四縣腔', '海陸腔', '大埔腔', '饒平腔', '詔安腔', ]:
+    KIUNN1_KHAU2_TSHAM1_SOO3[客話.rstrip('腔')] = {
+        '服務腔口': 客話,
+        '標音欄位': '臺灣客家',
+        '拼音': 臺灣客家話拼音,
+    },
