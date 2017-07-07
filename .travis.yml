@@ -16,9 +16,8 @@ addons:
     - libtool
     - libav-tools  
     - libmp3lame0
-    - libass5
 install:
-- sudo apt-get install -y libavcodec-extra-54 libx11-dev libx11-dev:i386
+- sudo apt-get install -y libavcodec-extra-54 libass4
 - pip install tox
 - pip install python-coveralls
 branches:
