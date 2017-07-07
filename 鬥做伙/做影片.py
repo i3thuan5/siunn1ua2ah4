@@ -151,7 +151,7 @@ class 做影片(程式腳本):
         )
         conn.request(
             "GET",
-            '{}?{}={}&{}={}'.format(
+            "/{}?{}={}&{}={}".format(
                 quote('語音合成'),
                 quote('查詢腔口'),
                 quote(腔口參數['服務腔口']),
