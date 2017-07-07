@@ -12,16 +12,15 @@ from siunn1ua2ah4.settings import I7SIAT4_TOO5
 
 from 臺灣言語工具.解析整理.拆文分析器 import 拆文分析器
 from 臺灣言語工具.解析整理.文章粗胚 import 文章粗胚
-from 臺灣言語工具.音標系統.閩南語.臺灣閩南語羅馬字拼音 import 臺灣閩南語羅馬字拼音
 
 
 class 做影片(程式腳本):
 
     @classmethod
-    def 使用者提供的資料(cls, 圖陣列, 聲陣列, 文字陣列, 影片存檔所在, 縮圖存檔所在):
+    def 使用者提供的資料(cls, 腔口參數, 圖陣列, 聲陣列, 文字陣列, 影片存檔所在, 縮圖存檔所在):
         with TemporaryDirectory() as 目錄:
-            字陣列 = cls.轉文本資料(文字陣列, 目錄)
-            cls.收著資料(圖陣列, 聲陣列, 字陣列, 影片存檔所在)
+            字陣列 = cls.轉文本資料(腔口參數, 文字陣列, 目錄)
+            cls.收著資料(腔口參數, 圖陣列, 聲陣列, 字陣列, 影片存檔所在)
             cls._走指令([
                 'avconv',
                 '-i', 影片存檔所在,
@@ -33,14 +32,14 @@ class 做影片(程式腳本):
             ])
 
     @classmethod
-    def 收著資料(cls, 圖陣列, 聲陣列, 字陣列, 存檔所在):
+    def 收著資料(cls, 腔口參數, 圖陣列, 聲陣列, 字陣列, 存檔所在):
         with TemporaryDirectory() as 目錄:
             新聲陣列 = []
             for 第幾个, (聲, 字) in enumerate(zip_longest(聲陣列, 字陣列)):
                 if 聲 is not None:
                     新聲陣列.append(聲)
                 else:
-                    新聲陣列.append(cls.揣聲音(字, join(目錄, '{}.wav'.format(第幾个))))
+                    新聲陣列.append(cls.揣聲音(腔口參數, 字, join(目錄, '{}.wav'.format(第幾个))))
             if len(圖陣列) == 0:
                 新圖陣列 = [I7SIAT4_TOO5] * len(字陣列)
             else:
@@ -90,7 +89,7 @@ class 做影片(程式腳本):
             copyfile(敆做伙轉換檔, 存檔所在)
 
     @classmethod
-    def 轉文本資料(cls, 文字陣列, 目錄):
+    def 轉文本資料(cls, 腔口參數, 文字陣列, 目錄):
         漢羅陣列 = []
         for 文字 in 文字陣列:
             for 一逝 in 文字.split('\n'):
@@ -102,8 +101,13 @@ class 做影片(程式腳本):
         )
         conn.request(
             "GET",
-            "/%E6%A8%99%E6%BC%A2%E5%AD%97%E9%9F%B3%E6%A8%99?%E6%9F%A5%E8%A9%A2%E8%85%94%E5%8F%A3=%E9%96%A9%E5%8D%97%E8%AA%9E&%E6%9F%A5%E8%A9%A2%E8%AA%9E%E5%8F%A5=" +
-            quote(漢羅)
+            "/{}?{}={}&{}={}".format(
+                quote('標漢字音標'),
+                quote('查詢腔口'),
+                quote(腔口參數['服務腔口']),
+                quote('查詢語句'),
+                quote(漢羅),
+            )
         )
         r1 = conn.getresponse()
         if r1.status != 200:
@@ -111,7 +115,9 @@ class 做影片(程式腳本):
             print(漢羅)
             raise RuntimeError()
         字陣列 = []
-        for 第幾筆, 資料 in enumerate(json.loads(r1.read().decode('utf-8'))['綜合標音']):
+        for 第幾筆, 資料 in enumerate(
+            json.loads(r1.read().decode('utf-8'))['綜合標音']
+        ):
             檔名 = join(目錄, '{}.srt'.format(第幾筆))
             cls._陣列寫入檔案(
                 檔名,
@@ -119,25 +125,25 @@ class 做影片(程式腳本):
                     '1',
                     '00:00:00,000 --> 00:00:00,100',
                     資料['漢字'].strip(),
-                    資料['臺羅閏號調'].strip()
+                    資料[腔口參數['標音欄位']].strip()
                 ]
             )
             字陣列.append(檔名)
         return 字陣列
 
     @classmethod
-    def 揣聲音(cls, 字, 存檔的所在):
+    def 揣聲音(cls, 腔口參數, 字, 存檔的所在):
         with open(字) as 檔案:
             *_, 漢字, 臺羅 = 檔案.read().strip().split('\n')
             with open(存檔的所在, 'wb') as 存檔:
-                存檔.write(cls.掠聲音(漢字, 臺羅))
+                存檔.write(cls.掠聲音(腔口參數, 漢字, 臺羅))
             return 存檔的所在
 
     @classmethod
-    def 掠聲音(cls, 漢字, 臺羅):
+    def 掠聲音(cls, 腔口參數, 漢字, 臺羅):
         句物件 = 拆文分析器.對齊句物件(
             文章粗胚.數字英文中央全加分字符號(漢字),
-            文章粗胚.建立物件語句前處理減號(臺灣閩南語羅馬字拼音, 臺羅)
+            文章粗胚.建立物件語句前處理減號(腔口參數['拼音'], 臺羅)
         )
         conn = http.client.HTTPConnection(
             "xn--lhrz38b.xn--v0qr21b.xn--kpry57d"

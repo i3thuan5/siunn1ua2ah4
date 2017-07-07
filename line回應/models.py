@@ -46,7 +46,7 @@ class 結果影片表(models.Model):
     縮圖 = models.FileField()
 
     @classmethod
-    def 加影片(cls, 全部圖, 聲陣列, 文字陣列):
+    def 加影片(cls, 腔口設定, 全部圖, 聲陣列, 文字陣列):
         圖陣列 = []
         for 圖 in 全部圖:
             圖陣列.append(圖.檔案路徑())
@@ -54,6 +54,7 @@ class 結果影片表(models.Model):
         結果影片.檔案.save('result', ContentFile(b''))
         結果影片.縮圖.save(結果影片.檔案.name + '.jpg', ContentFile(b''))
         做影片.使用者提供的資料(
+            腔口設定,
             圖陣列, 聲陣列, 文字陣列,
             結果影片.影片檔案路徑(), 結果影片.影片縮圖路徑()
         )
