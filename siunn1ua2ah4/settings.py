@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+from 臺灣言語工具.音標系統.閩南語.臺灣閩南語羅馬字拼音 import 臺灣閩南語羅馬字拼音
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -118,7 +119,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-DOMAIN='https://xn--iwqtoz61h.xn--v0qr21b.xn--kpry57d'
+DOMAIN = 'https://xn--iwqtoz61h.xn--v0qr21b.xn--kpry57d'
 MEDIA_ROOT = os.path.join(BASE_DIR, "upload")
 MEDIA_URL = "/upload/"
 
@@ -126,4 +127,12 @@ MEDIA_URL = "/upload/"
 I7SIAT4_TOO5 = os.path.join(BASE_DIR, '圖', 'ti1a2.jpg')
 
 from siat4ting7 import SECRET_KEY, YOUR_CHANNEL_SECRET, YOUR_CHANNEL_ACCESS_TOKEN
-SECRET_KEY,YOUR_CHANNEL_SECRET, YOUR_CHANNEL_ACCESS_TOKEN
+SECRET_KEY, YOUR_CHANNEL_SECRET, YOUR_CHANNEL_ACCESS_TOKEN
+
+KIUNN1_KHAU2_TSHAM1_SOO3={
+    '臺語': {
+        '服務腔口': '閩南語',
+        '標音欄位': '臺羅閏號調',
+        '拼音': 臺灣閩南語羅馬字拼音,
+    },
+}
