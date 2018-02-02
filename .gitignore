@@ -95,3 +95,4 @@ ENV/
 /.settings
 /db.sqlite3*
 /資料庫影音檔案*
+/MANIFEST
