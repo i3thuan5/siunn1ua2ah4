@@ -6,12 +6,14 @@ from os.path import join
 from shutil import copyfile
 from tempfile import TemporaryDirectory
 from urllib.parse import quote
-
+import ssl
 from siunn1ua2ah4.settings import I7SIAT4_TOO5
 
 
 from 臺灣言語工具.解析整理.拆文分析器 import 拆文分析器
 from 臺灣言語工具.解析整理.文章粗胚 import 文章粗胚
+
+ssl.match_hostname = lambda cert, hostname: True
 
 
 class 做影片(程式腳本):
