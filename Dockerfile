@@ -2,9 +2,7 @@ FROM ubuntu:latest
 MAINTAINER sih4sing5hong5
 
 RUN apt-get update -qq
-RUN apt-get install -y python3 virtualenv g++ python3-dev libyaml-dev libxslt1-dev git subversion automake libtool zlib1g-dev libboost-all-dev libbz2-dev liblzma-dev libgoogle-perftools-dev libxmlrpc-c++.*-dev libpq-dev postgresql postgresql-contrib make 
-RUN sudo apt-get install -y libc6-dev-i386 linux-libc-dev gcc-multilib libx11-dev libx11-dev:i386 # HTK
-RUN sudo apt-get install -y csh # SPTK
+RUN apt-get install -y python3 g++ python3-dev
 RUN sudo apt-get install -y libav-tools
 
 
