@@ -5,6 +5,7 @@ RUN apt-get update -qq
 RUN apt-get install -y python3 g++ python3-dev
 RUN apt-get install -y libav-tools
 RUN apt-get install -y locales
+RUN apt-get install -y python3-pip
 
 
 # Switch locale
