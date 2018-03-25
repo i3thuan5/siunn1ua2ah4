@@ -3,6 +3,8 @@ from tempfile import TemporaryDirectory
 
 from django.test.testcases import TestCase
 
+from siunn1ua2ah4.settings import KIUNN1_KHAU2_TSHAM1_SOO3
+
 
 from 鬥做伙.做影片 import 做影片
 
@@ -16,21 +18,21 @@ class 使用者提供的資料試驗(TestCase):
     def test_有產生縮圖(self):
         with TemporaryDirectory() as 目錄:
             做影片.使用者提供的資料(
-                [], [], ['逐家好'],
+                KIUNN1_KHAU2_TSHAM1_SOO3['臺語'], [], [], ['逐家好'],
                 join(目錄, 'sui.mp4'), join(目錄, 'sui.jpg'),
             )
             self.assertTrue(isfile(join(目錄, 'sui.jpg')))
 
     def test_產生檔案看覓(self):
         做影片.使用者提供的資料(
-            [], [], ['逐家好', '我是媠豬'],
+            KIUNN1_KHAU2_TSHAM1_SOO3['臺語'], [], [], ['逐家好', '我是媠豬'],
             join(self.目錄, 'sui.mp4'), join(self.目錄, 'sui.jpg'),
         )
 
     def test_有空逝(self):
         with TemporaryDirectory() as 目錄:
             做影片.使用者提供的資料(
-                [], [], ['逐家好', '', '我是媠豬'],
+                KIUNN1_KHAU2_TSHAM1_SOO3['臺語'], [], [], ['逐家好', '', '我是媠豬'],
                 join(目錄, 'sui.mp4'), join(目錄, 'sui.jpg'),
             )
 
@@ -38,6 +40,7 @@ class 使用者提供的資料試驗(TestCase):
         with TemporaryDirectory() as 目錄:
             self.組合圖 = join(self.目錄, '圖', 'image_oyuxYDl')
             做影片.使用者提供的資料(
-                [self.組合圖], [], ['逐家好', '我是媠豬'],
+                KIUNN1_KHAU2_TSHAM1_SOO3['臺語'], [
+                    self.組合圖], [], ['逐家好', '我是媠豬'],
                 join(目錄, 'sui.mp4'), join(目錄, 'sui.jpg'),
             )

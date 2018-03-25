@@ -21,7 +21,7 @@ class 收著資料試驗(TestCase):
     def test_無圖用預設圖(self, 敆做伙mock):
         with TemporaryDirectory() as 目錄:
             檔案的所在 = join(目錄, 'a.mp4')
-            做影片.收著資料([], [self.音], [self.字], 檔案的所在)
+            做影片.收著資料('閩南語', [], [self.音], [self.字], 檔案的所在)
             敆做伙mock.assert_called_once_with(
                 [I7SIAT4_TOO5], [self.音], [self.字], 檔案的所在)
 
@@ -29,6 +29,7 @@ class 收著資料試驗(TestCase):
         with TemporaryDirectory() as 目錄:
             檔案的所在 = join(目錄, 'a.mp4')
             做影片.收著資料(
+                '閩南語',
                 ['a.jpg', 'b.jpg'],
                 [self.音, self.音, self.音],
                 [self.字, self.字, self.字],
@@ -46,7 +47,7 @@ class 收著資料試驗(TestCase):
         揣聲音mock.return_value = self.音
         with TemporaryDirectory() as 目錄:
             檔案的所在 = join(目錄, 'a.mp4')
-            做影片.收著資料([self.圖], [], [self.字], 檔案的所在)
+            做影片.收著資料('閩南語', [self.圖], [], [self.字], 檔案的所在)
             敆做伙mock.assert_called_once_with(
                 [self.圖], [self.音], [self.字], 檔案的所在
             )

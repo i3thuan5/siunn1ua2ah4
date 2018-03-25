@@ -97,7 +97,7 @@ class 做影片(程式腳本):
                 if len(一逝.strip()) != 0:
                     漢羅陣列.append(一逝.strip())
         漢羅 = '\n'.join(漢羅陣列)
-        conn = http.client.HTTPConnection(
+        conn = http.client.HTTPSConnection(
             "xn--lhrz38b.xn--v0qr21b.xn--kpry57d"
         )
         conn.request(
@@ -146,7 +146,7 @@ class 做影片(程式腳本):
             文章粗胚.數字英文中央全加分字符號(漢字),
             文章粗胚.建立物件語句前處理減號(腔口參數['拼音'], 臺羅)
         )
-        conn = http.client.HTTPConnection(
+        conn = http.client.HTTPSConnection(
             "xn--lhrz38b.xn--v0qr21b.xn--kpry57d"
         )
         conn.request(
