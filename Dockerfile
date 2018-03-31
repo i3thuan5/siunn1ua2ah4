@@ -15,4 +15,4 @@ ENV LC_ALL zh_TW.UTF-8
 RUN pip3 install --upgrade tai5-uan5_gian5-gi2_hok8-bu7 django line-bot-sdk
 
 COPY . .
-RUN python manage.py migrate
+RUN python3 manage.py migrate

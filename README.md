@@ -7,6 +7,12 @@
 
 ### 腳本
 ```
+docker build -t siunn .
+docker run -p 5000:8000 siunn python3 manage.py runserver 0.0.0.0:8000
+```
+
+#### 佇系統面頂直接裝
+```
 sudo apt-get install -y language-pack-zh-hant fonts-wqy-microhei
 sudo apt-get install -y imagemagick libav-tools libavcodec-extra
 sudo apt-get install -y mkvtoolnix 
