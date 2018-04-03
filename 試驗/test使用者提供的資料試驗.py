@@ -23,12 +23,6 @@ class 使用者提供的資料試驗(TestCase):
             )
             self.assertTrue(isfile(join(目錄, 'sui.jpg')))
 
-    def test_產生檔案看覓(self):
-        做影片.使用者提供的資料(
-            KIUNN1_KHAU2_TSHAM1_SOO3['臺語'], [], [], ['逐家好', '我是媠豬'],
-            join(self.目錄, 'sui.mp4'), join(self.目錄, 'sui.jpg'),
-        )
-
     def test_有空逝(self):
         with TemporaryDirectory() as 目錄:
             做影片.使用者提供的資料(
