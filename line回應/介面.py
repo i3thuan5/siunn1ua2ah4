@@ -52,11 +52,6 @@ def 文字(event):
         line_bot_api.reply_message(
             event.reply_token,
             [
-                TextSendMessage(
-                    text='完成矣！攏總收著 {} 張背景圖。影片網址： {}'.format(
-                        全部圖.count(), 影片.網頁下載網址()
-                    )
-                ),
                 VideoSendMessage(
                     original_content_url=影片.影片網址(),
                     preview_image_url=影片.縮圖網址(),
