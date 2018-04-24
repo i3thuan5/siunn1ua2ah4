@@ -1,11 +1,15 @@
 FROM ubuntu:latest
 MAINTAINER sih4sing5hong5
 
-RUN apt-get update -qq
+RUN apt-get update #20180423
 RUN apt-get install -y python3 g++ python3-dev
 RUN apt-get install -y libav-tools
 RUN apt-get install -y locales
 RUN apt-get install -y python3-pip
+RUN apt-get install -y imagemagick # convert
+RUN apt-get install -y language-pack-zh-hant fonts-wqy-microhei
+RUN apt-get install -y imagemagick libav-tools libavcodec-extra
+RUN apt-get install -y mkvtoolnix 
 
 
 # Switch locale
