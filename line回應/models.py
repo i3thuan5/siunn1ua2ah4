@@ -51,7 +51,7 @@ class 結果影片表(models.Model):
         for 圖 in 全部圖:
             圖陣列.append(圖.檔案路徑())
         結果影片 = cls.objects.create()
-        結果影片.檔案.save('result', ContentFile(b''))
+        結果影片.檔案.save('result.mp4', ContentFile(b''))
         結果影片.縮圖.save(結果影片.檔案.name + '.jpg', ContentFile(b''))
         做影片.使用者提供的資料(
             腔口設定,
