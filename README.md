@@ -8,7 +8,8 @@
 ### 腳本
 ```
 docker build -t siunn .
-docker run -p 5000:8000 siunn python3 manage.py runserver 0.0.0.0:8000
+# docker run -p 5000:8000 siunn python3 manage.py runserver 0.0.0.0:8000
+docker run -e VIRTUAL_HOST=xn--iwqtoz61h.xn--v0qr21b.xn--kpry57d --expose 8000 --rm siunn gunicorn siunn1ua2ah4.wsgi -w 2 -b 0.0.0.0:8000
 ```
 
 #### 佇系統面頂直接裝
