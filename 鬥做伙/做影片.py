@@ -148,22 +148,20 @@ class 做影片(程式腳本):
             文章粗胚.數字英文中央全加分字符號(漢字),
             文章粗胚.建立物件語句前處理減號(腔口參數['拼音'], 臺羅)
         )
-        conn = http.client.HTTPSConnection(
-            "xn--lhrz38b.xn--v0qr21b.xn--kpry57d"
+        domain = "xn--lhrz38b.xn--v0qr21b.xn--kpry57d"
+        網址 = "/{}?{}={}&{}={}".format(
+            quote('語音合成'),
+            quote('查詢腔口'),
+            quote(腔口參數['服務腔口']),
+            quote('查詢語句'),
+            quote(句物件.看分詞()),
         )
-        conn.request(
-            "GET",
-            "/{}?{}={}&{}={}".format(
-                quote('語音合成'),
-                quote('查詢腔口'),
-                quote(腔口參數['服務腔口']),
-                quote('查詢語句'),
-                quote(句物件.看分詞()),
-            )
 
-        )
+        conn = http.client.HTTPSConnection(domain)
+        conn.request("GET", 網址)
         r1 = conn.getresponse()
         if r1.status != 200:
-            print(r1.status, r1.reason)
-            raise RuntimeError()
+            raise RuntimeError('連線錯誤：{}{}\n{} {}'.format(
+                domain, 網址, r1.status, r1.reason
+            ))
         return r1.read()
