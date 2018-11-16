@@ -1,7 +1,7 @@
-FROM ubuntu:latest
+FROM ubuntu:16.04
 MAINTAINER sih4sing5hong5
 
-RUN apt-get update #20180423
+RUN apt-get update
 RUN apt-get install -y python3 g++ python3-dev
 RUN apt-get install -y libav-tools
 RUN apt-get install -y locales
