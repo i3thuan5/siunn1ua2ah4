@@ -54,42 +54,32 @@ class 做影片(程式腳本):
     @classmethod
     def 敆做伙(cls, 圖陣列, 聲陣列, 字陣列, 存檔所在):
         with TemporaryDirectory() as 目錄:
-            全部結果檔 = []
-            for 第幾个, (圖, 聲, 字) in enumerate(zip(圖陣列, 聲陣列, 字陣列)):
-                結果檔 = join(目錄, 'output{}.mkv'.format(第幾个))
-                暫時圖 = join(目錄, 'jpg{}.jpg'.format(第幾个))
-                cls._走指令([
-                    'convert',
-                    圖,
-                    暫時圖,
-                ])
-                cls._走指令([
-                    'avconv',
-                    '-i', 暫時圖, '-i', 聲, '-vf', 'subtitles={}'.format(字),
-                    '-s', 'svga', '-y', 結果檔,
-                ])
-                全部結果檔.append(結果檔)
-            敆做伙結果檔 = join(目錄, 'result.mkv')
-            敆做伙指令 = ['mkvmerge']
-            敆做伙指令.append('-o')
-            敆做伙指令.append(敆做伙結果檔)
-            for 結果檔 in 全部結果檔:
-                敆做伙指令.append(結果檔)
-                敆做伙指令.append('+')
-            敆做伙指令.pop()
+            全部結果表 = join(目錄, 'tuan.pio')
+            with open(全部結果表, 'w') as 表:
+                for 第幾个, (圖, 聲, 字) in enumerate(zip(圖陣列, 聲陣列, 字陣列)):
+                    結果檔 = join(目錄, 'output{}.mp4'.format(第幾个))
+                    暫時圖 = join(目錄, 'jpg{}.jpg'.format(第幾个))
+                    cls._走指令([
+                        'convert',
+                        圖,
+                        暫時圖,
+                    ])
+                    cls._走指令([
+                        'avconv',
+                        '-i', 暫時圖, '-i', 聲, '-vf', 'subtitles={}'.format(字),
+                        '-s', 'svga', '-y', 結果檔,
+                    ])
+                    print("file '{}'".format(結果檔), file=表)
+
+            敆做伙指令 = [
+                'ffmpeg',
+                '-f', 'concat',
+                '-safe', '0',
+                '-i', 全部結果表,
+                '-c', 'copy',
+                存檔所在
+            ]
             cls._走指令(敆做伙指令)
-
-            敆做伙轉換檔 = join(目錄, 'result.mp4')
-            上尾轉換指令 = ['avconv']
-            上尾轉換指令.append('-i')
-            上尾轉換指令.append(敆做伙結果檔)
-#             上尾轉換指令.append('-c')
-#             上尾轉換指令.append('copy')
-            上尾轉換指令.append('-y')
-            上尾轉換指令.append(敆做伙轉換檔)
-            cls._走指令(上尾轉換指令)
-
-            copyfile(敆做伙轉換檔, 存檔所在)
 
     @classmethod
     def 轉文本資料(cls, 腔口參數, 文字陣列, 目錄):
