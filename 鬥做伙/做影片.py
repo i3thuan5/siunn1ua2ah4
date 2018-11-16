@@ -20,8 +20,8 @@ class 做影片(程式腳本):
     @classmethod
     def 使用者提供的資料(cls, 腔口參數, 圖陣列, 聲陣列, 文字陣列, 影片存檔所在, 縮圖存檔所在):
         with TemporaryDirectory() as 目錄:
-            字幕檔陣列,分詞陣列 = cls.轉文本資料(腔口參數, 文字陣列, 目錄)
-            cls.收著資料(腔口參數, 圖陣列, 聲陣列, 字幕檔陣列,分詞陣列, 影片存檔所在)
+            字幕檔陣列, 分詞陣列 = cls.轉文本資料(腔口參數, 文字陣列, 目錄)
+            cls.收著資料(腔口參數, 圖陣列, 聲陣列, 字幕檔陣列, 分詞陣列, 影片存檔所在)
             cls._走指令([
                 'avconv',
                 '-i', 影片存檔所在,
@@ -33,7 +33,7 @@ class 做影片(程式腳本):
             ])
 
     @classmethod
-    def 收著資料(cls, 腔口參數, 圖陣列, 聲陣列, 字幕檔陣列,分詞陣列, 存檔所在):
+    def 收著資料(cls, 腔口參數, 圖陣列, 聲陣列, 字幕檔陣列, 分詞陣列, 存檔所在):
         with TemporaryDirectory() as 目錄:
             新聲陣列 = []
             for 第幾个, (聲, 分詞) in enumerate(zip_longest(聲陣列, 分詞陣列)):
@@ -42,7 +42,7 @@ class 做影片(程式腳本):
                 else:
                     新聲陣列.append(
                         cls.揣聲音(腔口參數, 分詞, join(目錄, '{}.wav'.format(第幾个)))
-                        )
+                    )
             if len(圖陣列) == 0:
                 新圖陣列 = [I7SIAT4_TOO5] * len(字幕檔陣列)
             else:
@@ -125,13 +125,13 @@ class 做影片(程式腳本):
             )
             字幕檔陣列.append(檔名)
             分詞陣列.append(資料['分詞'])
-        return 字幕檔陣列,分詞陣列
+        return 字幕檔陣列, 分詞陣列
 
     @classmethod
     def 揣聲音(cls, 腔口參數, 分詞, 存檔的所在):
-            with open(存檔的所在, 'wb') as 存檔:
-                存檔.write(cls.掠聲音(腔口參數, 分詞))
-            return 存檔的所在
+        with open(存檔的所在, 'wb') as 存檔:
+            存檔.write(cls.掠聲音(腔口參數, 分詞))
+        return 存檔的所在
 
     @classmethod
     def 掠聲音(cls, 腔口參數, 分詞):
