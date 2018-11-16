@@ -3,7 +3,7 @@ version: '3.5'
 services:
   gunicorn:
     build: .
-    command: gunicorn siunn1ua2ah4.wsgi --log-level debug -w 2 -b 0.0.0.0:8000
+    command: gunicorn siunn1ua2ah4.wsgi --log-level DEBUG -w 2 -b 0.0.0.0:8000
     volumes:
       - ./hok8_bu7/local.py:/usr/local/hok8-bu7/hok8_bu7/local.py
     expose:
