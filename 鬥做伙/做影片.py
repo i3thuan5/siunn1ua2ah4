@@ -3,7 +3,6 @@ import http
 from itertools import zip_longest
 import json
 from os.path import join
-from shutil import copyfile
 from tempfile import TemporaryDirectory
 from urllib.parse import quote
 import ssl
