@@ -6,8 +6,13 @@ services:
     command: gunicorn siunn1ua2ah4.wsgi --log-level DEBUG -w 2 -b 0.0.0.0:8000
     volumes:
       - ./hok8_bu7/local.py:/usr/local/hok8-bu7/hok8_bu7/local.py
-    expose:
-      - "8000"
+    networks:
+      - default
+      - nginx-bridge
     environment:
       VIRTUAL_HOST: "xn--iwqtoz61h.xn--v0qr21b.xn--kpry57d"
       VIRTUAL_PORT: 8000
+
+networks:
+  nginx-bridge:
+    external: true
