@@ -14,6 +14,8 @@ services:
     environment:
       VIRTUAL_HOST: "xn--iwqtoz61h.xn--v0qr21b.xn--kpry57d"
       VIRTUAL_PORT: 8000
+      LETSENCRYPT_HOST: "xn--iwqtoz61h.xn--v0qr21b.xn--kpry57d"
+      LETSENCRYPT_EMAIL: "ithuan@xn--v0qr21b.xn--kpry57d"
 
 networks:
   nginx-bridge:
